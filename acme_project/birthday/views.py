@@ -13,7 +13,6 @@ def birthday(request, pk=None):
         instance = None
     form = BirthdayForm(
         request.POST or None,
-        # Файлы, переданные в запросе, указываются отдельно.
         files=request.FILES or None,
         instance=instance
     )
@@ -26,19 +25,10 @@ def birthday(request, pk=None):
 
 
 def birthday_list(request):
-    # Получаем список всех объектов с сортировкой по id.
     birthdays = Birthday.objects.order_by('id')
-    # Создаём объект пагинатора с количеством 10 записей на страницу.
     paginator = Paginator(birthdays, 10)
-
-    # Получаем из запроса значение параметра page.
     page_number = request.GET.get('page')
-    # Получаем запрошенную страницу пагинатора. 
-    # Если параметра page нет в запросе или его значение не приводится к числу,
-    # вернётся первая страница.
     page_obj = paginator.get_page(page_number)
-    # Вместо полного списка объектов передаём в контекст 
-    # объект страницы пагинатора
     context = {'page_obj': page_obj}
     return render(request, 'birthday/birthday_list.html', context)
 
