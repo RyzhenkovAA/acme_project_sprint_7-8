@@ -32,7 +32,10 @@
           {% else %}
             <li class="nav-item">
               <a class="nav-link{% if view_name == 'login' %} active {% endif %}" href="{% url 'login' %}">Войти</a>
-            </li>        
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if view_name == 'registration' %} active {% endif %}" href="{% url 'registration' %}">Регистрация</a>
+            </li>       
           {% endif %}
           <!-- Конец блока ссылок для неавторизованного пользователя -->
         </ul>
